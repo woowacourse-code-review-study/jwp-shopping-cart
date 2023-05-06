@@ -1,0 +1,76 @@
+DROP TABLE IF EXISTS PRODUCT_CATEGORY;
+DROP TABLE IF EXISTS CART;
+DROP TABLE IF EXISTS PRODUCT;
+DROP TABLE IF EXISTS CATEGORY;
+DROP TABLE IF EXISTS MEMBER;
+
+CREATE TABLE PRODUCT
+(
+    id          BIGINT      NOT NULL AUTO_INCREMENT,
+    name        VARCHAR(50) NOT NULL,
+    image_url   TEXT        NOT NULL,
+    price       INT         NOT NULL,
+    description VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE CATEGORY
+(
+    id   BIGINT      NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE PRODUCT_CATEGORY
+(
+    id          BIGINT NOT NULL AUTO_INCREMENT,
+    product_id  BIGINT NOT NULL,
+    category_id BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCT (id),
+    FOREIGN KEY (category_id) REFERENCES CATEGORY (id)
+);
+
+CREATE TABLE MEMBER
+(
+    id       BIGINT       NOT NULL AUTO_INCREMENT,
+    email    VARCHAR(255) NOT NULL,
+    password VARCHAR(50)  NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE CART
+(
+    id         BIGINT NOT NULL AUTO_INCREMENT,
+    member_id  BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (member_id) REFERENCES MEMBER (id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCT (id)
+);
+
+INSERT INTO CATEGORY (id, name)
+VALUES (1, '카페');
+INSERT INTO CATEGORY (id, name)
+VALUES (2, '한식');
+INSERT INTO CATEGORY (id, name)
+VALUES (3, '양식');
+INSERT INTO CATEGORY (id, name)
+VALUES (4, '일식');
+INSERT INTO CATEGORY (id, name)
+VALUES (5, '중식');
+INSERT INTO CATEGORY (id, name)
+VALUES (6, '치킨');
+INSERT INTO CATEGORY (id, name)
+VALUES (7, '분식');
+INSERT INTO CATEGORY (id, name)
+VALUES (8, '해산물');
+INSERT INTO CATEGORY (id, name)
+VALUES (9, '샐러드');
+INSERT INTO CATEGORY (id, name)
+VALUES (10, '없음');
+
+INSERT INTO MEMBER (email, password)
+VALUES ('a@a.com', 'password1');
+INSERT INTO MEMBER (email, password)
+VALUES ('b@b.com', 'password2');
