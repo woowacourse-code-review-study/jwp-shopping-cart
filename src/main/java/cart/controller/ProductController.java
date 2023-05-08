@@ -25,21 +25,21 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Integer> productAdd(@Validated @RequestBody ProductAddRequestDto productAddRequestDto) {
         int productId = productService.save(productAddRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).location(URI.create("/products/" + productId)).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> productModify(@Validated @RequestBody ProductModifyRequestDto productModifyRequestDto,
+    public ResponseEntity<Void> productModify(@Validated @RequestBody ProductModifyRequestDto productModifyRequestDto,
                                                 @PathVariable int id) {
         productService.update(productModifyRequestDto, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> productRemove(@PathVariable int id) {
+    public ResponseEntity<Void> productRemove(@PathVariable int id) {
         productService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

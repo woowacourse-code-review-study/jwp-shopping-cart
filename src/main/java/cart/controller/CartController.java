@@ -25,21 +25,21 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<ProductDto>> findAllProductInCart(@AuthMemberId int memberId) {
         List<ProductDto> allProduct = cartService.findAllProduct(memberId);
         return ResponseEntity.status(HttpStatus.OK).body(allProduct);
     }
 
-    @PostMapping()
-    public ResponseEntity<Object> addProductToCart(@AuthMemberId int memberId,
+    @PostMapping
+    public ResponseEntity<Void> addProductToCart(@AuthMemberId int memberId,
                                                    @RequestBody CartProductAddRequestDto cartProductAddRequestDto) {
         cartService.addProduct(memberId, cartProductAddRequestDto.getProductId());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping()
-    public ResponseEntity<Object> removeProductFromCart(@AuthMemberId int memberId,
+    @DeleteMapping
+    public ResponseEntity<Void> removeProductFromCart(@AuthMemberId int memberId,
                                                         @RequestBody CartProductRemoveRequestDto cartProductRemoveRequestDto) {
         cartService.deleteProduct(memberId, cartProductRemoveRequestDto.getProductId());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
