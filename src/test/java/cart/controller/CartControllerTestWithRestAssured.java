@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CartControllerTest {
+class CartControllerTestWithRestAssured {
     @Autowired
     private CartDao cartDao;
 
